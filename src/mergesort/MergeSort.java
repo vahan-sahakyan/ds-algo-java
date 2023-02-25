@@ -6,7 +6,7 @@ package mergesort;
  * 
  * SC -> O(n);
  * 
- * TC -> O(n * log(n))
+ * TC -> O(n log n);
  * 
  */
 
@@ -15,7 +15,9 @@ class MergeSort {
 
     int[] numbers = { 99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0, };
 
-    for (int n : mergeSort(numbers)) {
+    int[] sortedNumbers = mergeSort(numbers);
+
+    for (int n : sortedNumbers) {
       System.out.println(n);
     }
 
@@ -57,6 +59,7 @@ class MergeSort {
         result[k++] = right[j++];
       }
     }
+
     for (int l = k; l < length; l++) {
       if (i < left.length) {
         result[l] = left[i++];
@@ -67,5 +70,4 @@ class MergeSort {
 
     return result;
   }
-
 }
