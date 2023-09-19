@@ -10,64 +10,58 @@ package mergesort;
  * 
  */
 
-class MergeSort {
-  public static void main(String[] args) {
 
-    int[] numbers = { 99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0, };
+import java.util.List;
+import java.util.ArrayList;
 
-    int[] sortedNumbers = mergeSort(numbers);
-
-    for (int n : sortedNumbers) {
-      System.out.println(n);
+public class MergeSort {
+    public static void main(String[] args) {
+        ArrayList<Integer> numbers = new ArrayList<>(List.of(99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0));
+        ArrayList<Integer> sortedNumbers = mergeSort(numbers);
+        System.out.println("random: " + numbers);
+        System.out.println("sorted: " + sortedNumbers);
     }
-
-  }
 
   // divides the array recursively until single item arrays
-  private static int[] mergeSort(int[] array) {
-    if (array.length == 1)
-      return array;
-    int mainLength = array.length;
-    int middle = mainLength / 2;
-    int leftLength = middle;
-    int rightLength = mainLength - middle;
+  private static ArrayList<Integer> mergeSort(ArrayList<Integer> arr) {
+      if (arr.size() == 1) return arr;
+     
+      int mid = arr.size() >> 1;
+      int i = 0;
+      
+      ArrayList<Integer> left = new ArrayList<>();
+      ArrayList<Integer> right = new ArrayList<>();
 
-    int[] left = new int[leftLength];
-    int[] right = new int[rightLength];
+      while (i < mid) left.add(arr.get(i++));
+      while (i < arr.size()) right.add(arr.get(i++));
 
-    for (int i = 0; i < leftLength; i++) {
-      left[i] = array[i];
-    }
-    for (int i = middle, j = 0; i < mainLength; i++, j++) {
-      right[j] = array[i];
-    }
-
-    return merge(mergeSort(left), mergeSort(right), mainLength);
+      return merge(mergeSort(left), mergeSort(right), arr.size());
   }
 
   // merges two already sorted arrays
-  private static int[] merge(int[] left, int[] right, int length) {
-    int[] result = new int[length];
-    int i = 0;
-    int j = 0;
-    int k = 0;
+  private static ArrayList<Integer> merge(ArrayList<Integer> left, ArrayList<Integer> right, int length) {
+      ArrayList<Integer> result = new ArrayList<>();
+      int i = 0;
+      int j = 0;
+      int k = 0;
 
-    while (i < left.length && j < right.length) {
-      if (left[i] < right[j]) {
-        result[k++] = left[i++];
-      } else {
-        result[k++] = right[j++];
+      while (i < left.size() && j < right.size()) {
+          if (left.get(i) < right.get(j)) {
+              result.add(left.get(i++));
+          } else {
+              result.add(right.get(j++));
+          }
       }
-    }
 
-    for (int l = k; l < length; l++) {
-      if (i < left.length) {
-        result[l] = left[i++];
-      } else if (j < right.length) {
-        result[l] = right[j++];
+      while (k++ < length) {
+          if (i < left.size()) {
+              result.add(left.get(i++));
+          } else if (j < right.size()) {
+              result.add(right.get(j++));
+          }
       }
-    }
 
-    return result;
+      return result;
   }
 }
+
