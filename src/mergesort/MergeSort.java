@@ -22,46 +22,46 @@ public class MergeSort {
         System.out.println("sorted: " + sortedNumbers);
     }
 
-  // divides the array recursively until single item arrays
-  private static ArrayList<Integer> mergeSort(ArrayList<Integer> arr) {
-      if (arr.size() == 1) return arr;
-     
-      int mid = arr.size() >> 1;
-      int i = 0;
-      
-      ArrayList<Integer> left = new ArrayList<>();
-      ArrayList<Integer> right = new ArrayList<>();
+    // divides the array recursively until single item arrays
+    private static ArrayList<Integer> mergeSort(ArrayList<Integer> arr) {
+        if (arr.size() == 1) return arr;
 
-      while (i < mid) left.add(arr.get(i++));
-      while (i < arr.size()) right.add(arr.get(i++));
+        int mid = arr.size() >> 1;
+        int i = 0;
 
-      return merge(mergeSort(left), mergeSort(right), arr.size());
-  }
+        ArrayList<Integer> left = new ArrayList<>();
+        ArrayList<Integer> right = new ArrayList<>();
 
-  // merges two already sorted arrays
-  private static ArrayList<Integer> merge(ArrayList<Integer> left, ArrayList<Integer> right, int length) {
-      ArrayList<Integer> result = new ArrayList<>();
-      int i = 0;
-      int j = 0;
-      int k = 0;
+        while (i < mid) left.add(arr.get(i++));
+        while (i < arr.size()) right.add(arr.get(i++));
 
-      while (i < left.size() && j < right.size()) {
-          if (left.get(i) < right.get(j)) {
-              result.add(left.get(i++));
-          } else {
-              result.add(right.get(j++));
-          }
-      }
+        return merge(mergeSort(left), mergeSort(right), arr.size());
+    }
 
-      while (k++ < length) {
-          if (i < left.size()) {
-              result.add(left.get(i++));
-          } else if (j < right.size()) {
-              result.add(right.get(j++));
-          }
-      }
+    // merges two already sorted arrays
+    private static ArrayList<Integer> merge(ArrayList<Integer> left, ArrayList<Integer> right, int length) {
+        ArrayList<Integer> result = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+        int k = 0;
 
-      return result;
-  }
+        while (i < left.size() && j < right.size()) {
+            if (left.get(i) < right.get(j)) {
+                result.add(left.get(i++));
+            } else {
+                result.add(right.get(j++));
+            }
+        }
+
+        while (k++ < length) {
+            if (i < left.size()) {
+                result.add(left.get(i++));
+            } else if (j < right.size()) {
+                result.add(right.get(j++));
+            }
+        }
+
+        return result;
+    }
 }
 
