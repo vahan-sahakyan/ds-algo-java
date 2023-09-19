@@ -10,57 +10,51 @@ package mergesort;
  * 
  */
 
-
 import java.util.List;
 import java.util.ArrayList;
 
 public class MergeSort {
     public static void main(String[] args) {
         ArrayList<Integer> numbers = new ArrayList<>(List.of(99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0));
-        ArrayList<Integer> sortedNumbers = mergeSort(numbers);
+        ArrayList<Integer> sorted = mergeSort(numbers);
         System.out.println("random: " + numbers);
-        System.out.println("sorted: " + sortedNumbers);
+        System.out.println("sorted: " + sorted);
     }
 
     // divides the array recursively until single item arrays
     private static ArrayList<Integer> mergeSort(ArrayList<Integer> arr) {
-        if (arr.size() == 1) return arr;
-
-        int mid = arr.size() >> 1;
-        int i = 0;
-
+        int length = arr.size();
+        if (length == 1) return arr;
+        int middle = length >> 1;
+        int ii = 0;
         ArrayList<Integer> left = new ArrayList<>();
         ArrayList<Integer> right = new ArrayList<>();
-
-        while (i < mid) left.add(arr.get(i++));
-        while (i < arr.size()) right.add(arr.get(i++));
-
-        return merge(mergeSort(left), mergeSort(right), arr.size());
+        while (ii < middle) left.add(arr.get(ii++));
+        while (ii < length) right.add(arr.get(ii++));
+        return merge(mergeSort(left), mergeSort(right), length);
     }
 
     // merges two already sorted arrays
     private static ArrayList<Integer> merge(ArrayList<Integer> left, ArrayList<Integer> right, int length) {
         ArrayList<Integer> result = new ArrayList<>();
-        int i = 0;
-        int j = 0;
-        int k = 0;
-
-        while (i < left.size() && j < right.size()) {
-            if (left.get(i) < right.get(j)) {
-                result.add(left.get(i++));
+        int ii = 0;
+        int jj = 0;
+        while (ii < left.size() && jj < right.size()) {
+            if (left.get(ii) < right.get(jj)) {
+                result.add(left.get(ii++));
             } else {
-                result.add(right.get(j++));
+                result.add(right.get(jj++));
             }
+            --length;
         }
-
-        while (k++ < length) {
-            if (i < left.size()) {
-                result.add(left.get(i++));
-            } else if (j < right.size()) {
-                result.add(right.get(j++));
+        while (length != 0) {
+            if (ii < left.size()) {
+                result.add(left.get(ii++));
+            } else {
+                result.add(right.get(jj++));
             }
+            --length;
         }
-
         return result;
     }
 }
