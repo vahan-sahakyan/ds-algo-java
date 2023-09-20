@@ -1,15 +1,5 @@
 package mergesort;
 
-/**
- * 
- * Merge Sort Algorithm
- * 
- * SC -> O(n);
- * 
- * TC -> O(n log n);
- * 
- */
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,20 +11,39 @@ public class MergeSort {
         System.out.println("sorted: " + sorted);
     }
 
-    // divides the array recursively until single item arrays
-    private static ArrayList<Integer> mergeSort(ArrayList<Integer> arr) {
-        int length = arr.size();
-        if (length == 1) return arr;
+    /**
+     * @Details
+     *          Merge Sort Algorithm
+     *          <ul>
+     *          <li>Non-Mutating</li>
+     *          <li>Space Complexity: O(n)</li>
+     *          <li>Time Complexity: O(n log n)</li>
+     *          </ul>
+     * @param array ArrayList
+     * @return void
+     * @Description
+     *              divides the array recursively until single item arrays
+     */
+    private static ArrayList<Integer> mergeSort(ArrayList<Integer> array) {
+        int length = array.size();
+        if (length == 1) return array;
         int middle = length >> 1;
         int ii = 0;
         ArrayList<Integer> left = new ArrayList<>();
         ArrayList<Integer> right = new ArrayList<>();
-        while (ii < middle) left.add(arr.get(ii++));
-        while (ii < length) right.add(arr.get(ii++));
+        while (ii < middle) left.add(array.get(ii++));
+        while (ii < length) right.add(array.get(ii++));
         return merge(mergeSort(left), mergeSort(right), length);
     }
 
-    // merges two already sorted arrays
+    /**
+     * @param left   ArrayList
+     * @param right  ArrayList
+     * @param length int
+     * @return ArrayList
+     * @Description
+     *              merges two arrays by sorting
+     */
     private static ArrayList<Integer> merge(ArrayList<Integer> left, ArrayList<Integer> right, int length) {
         ArrayList<Integer> result = new ArrayList<>();
         int ii = 0;
@@ -58,4 +67,3 @@ public class MergeSort {
         return result;
     }
 }
-
