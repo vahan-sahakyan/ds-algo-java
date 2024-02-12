@@ -20,7 +20,7 @@ public class MergeSort {
      *          <li>Time Complexity: O(n log n)</li>
      *          </ul>
      * @param array ArrayList
-     * @return void
+     * @return ArrayList
      * @Description
      *              divides the array recursively until single item arrays
      */
